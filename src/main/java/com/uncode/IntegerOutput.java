@@ -87,9 +87,7 @@ public class IntegerOutput implements Iterable<Integer> {
     //filter the invalid num (e.g ++100,five)
     private boolean verify(String s) {
         if (s != null && isInteger(s.trim())) {
-            if (s.trim().length() < 10
-                    && ((Integer.valueOf(s.trim())) > Integer.MIN_VALUE
-                    && Integer.valueOf(s.trim()) < Integer.MAX_VALUE)) {
+            if (isValidInt(s.trim())) {
                 return true;
             }
             return false;
@@ -104,6 +102,16 @@ public class IntegerOutput implements Iterable<Integer> {
             return true;
         }
         return false;
+    }
+
+    //judge if larger than the int MAX_VALUE(or less than the MIN_VALUE)
+    private boolean isValidInt(String value) {
+        try {
+            Integer.valueOf(value.trim());
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
